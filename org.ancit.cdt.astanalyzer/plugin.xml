@@ -17,6 +17,20 @@
       </view>
    </extension>
    <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.ancit.cdt.astanalyzer.Perspective"
+            id="org.ancit.cdt.astanalyzer.perspective.cdt"
+            name="CDT AST Analyzer">
+      </perspective>
+   </extension>
+   <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.ancit.cdt.astanalyzer.perspective.cdt">
@@ -68,34 +82,11 @@
                id="com.bosch.shacc.pmse.problemview"
                minimized="false"
                moveable="true"
-               relationship="stack"
+               relationship="right"
                relative="org.eclipse.ui.console.ConsoleView"
                visible="true">
          </view>
       </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.help.contexts">
-      <contexts
-            file="contexts.xml">
-      </contexts>
-   </extension>
-   <extension
-         point="org.eclipse.ui.perspectives">
-      <perspective
-            class="org.ancit.cdt.astanalyzer.Perspective"
-            id="org.ancit.cdt.astanalyzer.perspective.cdt"
-            name="CDT AST Analyzer">
-      </perspective>
-   </extension>
-   <extension
-         id="id1"
-         point="org.eclipse.core.runtime.applications">
-      <application>
-         <run
-               class="org.ancit.cdt.astanalyzer.Application">
-         </run>
-      </application>
    </extension>
 
 </plugin>

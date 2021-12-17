@@ -70,11 +70,12 @@ public class CDTAbstractSyntaxTreeView extends ViewPart {
 				if (selection instanceof IStructuredSelection) {
 					IStructuredSelection sSelection = (IStructuredSelection) selection;
 					System.out.println(sSelection.getFirstElement().getClass());
+					System.out.println(sSelection.getFirstElement());
 					if (sSelection.getFirstElement() instanceof ITranslationUnit) {
 						ITranslationUnit project = (ITranslationUnit) sSelection.getFirstElement();
 						try {
 							IASTNode astNode = project.getAST();
-							printAST(astNode.getChildren());
+//							printAST(astNode.getChildren());
 							viewer.setInput(astNode); // pass a non-null that will be ignored
 							viewer.refresh();
 							

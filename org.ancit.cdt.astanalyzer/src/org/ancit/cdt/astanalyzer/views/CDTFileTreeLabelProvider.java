@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
@@ -43,7 +44,12 @@ public class CDTFileTreeLabelProvider implements ILabelProvider {
 		if (iastNode instanceof CPPASTFunctionDefinition) {
 			CPPASTFunctionDefinition cppFunctionDefinition = (CPPASTFunctionDefinition) iastNode;
 			text = cppFunctionDefinition.getRawSignature();
-		} else if (iastNode instanceof CPPASTIfStatement) {
+		}
+		else if (iastNode instanceof CPPASTNamespaceDefinition) {
+			CPPASTNamespaceDefinition nameSpaceDef = (CPPASTNamespaceDefinition) iastNode;
+			text = nameSpaceDef.getRawSignature();
+		}
+		else if (iastNode instanceof CPPASTIfStatement) {
 			CPPASTIfStatement ifStatement = (CPPASTIfStatement) iastNode;
 			text = ifStatement.getRawSignature();
 		} else if (iastNode instanceof CPPASTBinaryExpression) {

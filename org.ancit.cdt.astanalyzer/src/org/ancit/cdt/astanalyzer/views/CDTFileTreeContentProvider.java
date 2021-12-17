@@ -1,8 +1,11 @@
 package org.ancit.cdt.astanalyzer.views;
 
-import java.io.File;
-
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -32,6 +35,17 @@ public class CDTFileTreeContentProvider implements ITreeContentProvider {
 		if (element instanceof IASTNode) {
 		  return element == null ? false : ((IASTNode) element).getChildren().length > 0;
 		}
+		else if (element instanceof CPPASTFunctionDefinition) {
+			return element == null ? false : ((CPPASTFunctionDefinition) element).getChildren().length > 0;
+		}
+		else if (element instanceof CPPASTNamespaceDefinition) {
+			return element == null ? false : ((CPPASTNamespaceDefinition) element).getChildren().length > 0;
+		}
+		else if (element instanceof CPPASTIfStatement) {
+			return element == null ? false : ((CPPASTIfStatement) element).getChildren().length > 0;
+		} else if (element instanceof CPPASTBinaryExpression) {
+			return element == null ? false : ((CPPASTBinaryExpression) element).getChildren().length > 0;
+		}
 		return false;
 	}
 	
@@ -44,11 +58,18 @@ public class CDTFileTreeContentProvider implements ITreeContentProvider {
    *            the input data
    * @return Object[]
    */
-  public Object[] getElements(Object arg0) {
+@Override
+  public Object[] getElements(Object node) {
     // These are the root elements of the tree
     // We don't care what arg0 is, because we just want all
     // the root nodes in the file system
-    return File.listRoots();
+	if (node instanceof CPPASTTranslationUnit) {
+		return((CPPASTTranslationUnit) node).getChildren();
+	}
+	else if (node instanceof IASTNode) {
+		return((IASTNode) node).getChildren();
+	}
+	return null;
   }
 
   /**
