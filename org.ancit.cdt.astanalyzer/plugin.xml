@@ -9,22 +9,68 @@
       </category>
       <view
             category="org.ancit.cdt.astanalyzer"
-            class="org.ancit.cdt.astanalyzer.views.SampleView"
+            class="org.ancit.cdt.astanalyzer.views.CDTAbstractSyntaxTreeView"
             icon="icons/sample.png"
-            id="org.ancit.cdt.astanalyzer.views.SampleView"
+            id="org.ancit.cdt.astanalyzer.views.cdtanlalyzerview"
             inject="true"
-            name="https://github.com/cmalai/cfuncanalyzer.gitCDT Analyzer Viewr View">
+            name="CDT Analyzer View">
       </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="org.eclipse.jdt.ui.JavaPerspective">
+            targetID="org.ancit.cdt.astanalyzer.perspective.cdt">
+                  <view
+               closeable="true"
+               id="org.eclipse.ui.console.ConsoleView"
+               minimized="false"
+               moveable="true"
+               ratio=".65"
+               relationship="bottom"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
          <view
-               id="org.ancit.cdt.astanalyzer.views.SampleView"
-               ratio="0.5"
+               closeable="true"
+               id="org.eclipse.ui.navigator.ProjectExplorer"
+               minimized="false"
+               moveable="true"
+               ratio=".8"
+               relationship="left"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <view
+               closeable="true"
+               id="org.ancit.cdt.astanalyzer.views.cdtanlalyzerview"
+               minimized="false"
+               moveable="true"
+               ratio=".27"
                relationship="right"
-               relative="org.eclipse.ui.views.ProblemView">
+               relative="org.eclipse.ui.navigator.ProjectExplorer"
+               visible="true">
+         </view>   
+         <view
+               closeable="true"
+               id="org.eclipse.ui.views.PropertySheet"
+               minimized="false"
+               moveable="true"
+               ratio=".05"
+               relationship="right"
+               relative="org.eclipse.ui.editorss"
+               visible="true">
+         </view>
+         <hiddenToolBarItem
+               id="newWizardDropDown">
+         </hiddenToolBarItem>
+         <view
+               closeable="true"
+               id="com.bosch.shacc.pmse.problemview"
+               minimized="false"
+               moveable="true"
+               relationship="stack"
+               relative="org.eclipse.ui.console.ConsoleView"
+               visible="true">
          </view>
       </perspectiveExtension>
    </extension>
@@ -33,6 +79,23 @@
       <contexts
             file="contexts.xml">
       </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.ancit.cdt.astanalyzer.Perspective"
+            id="org.ancit.cdt.astanalyzer.perspective.cdt"
+            name="CDT AST Analyzer">
+      </perspective>
+   </extension>
+   <extension
+         id="id1"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.ancit.cdt.astanalyzer.Application">
+         </run>
+      </application>
    </extension>
 
 </plugin>
