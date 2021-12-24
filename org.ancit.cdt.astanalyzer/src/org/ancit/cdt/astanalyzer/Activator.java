@@ -1,5 +1,10 @@
 package org.ancit.cdt.astanalyzer;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.internal.UIPlugin;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -13,7 +18,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -39,6 +44,10 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	public static ImageDescriptor getImageDescriptor(String name) {
+		return Activator.getImageDescriptor(name);
 	}
 
 }

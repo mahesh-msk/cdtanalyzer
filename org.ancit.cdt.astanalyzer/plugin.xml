@@ -79,7 +79,7 @@
          </hiddenToolBarItem>
          <view
                closeable="true"
-               id="com.bosch.shacc.pmse.problemview"
+               id="org.eclipse.ui.views.ProblemView"
                minimized="false"
                moveable="true"
                relationship="right"

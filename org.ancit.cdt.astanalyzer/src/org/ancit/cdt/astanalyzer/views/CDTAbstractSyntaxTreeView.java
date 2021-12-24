@@ -9,7 +9,6 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTBinaryExpression;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -69,20 +68,23 @@ public class CDTAbstractSyntaxTreeView extends ViewPart {
 				// TODO Auto-generated method stub
 				if (selection instanceof IStructuredSelection) {
 					IStructuredSelection sSelection = (IStructuredSelection) selection;
-					System.out.println(sSelection.getFirstElement().getClass());
-					System.out.println(sSelection.getFirstElement());
-					if (sSelection.getFirstElement() instanceof ITranslationUnit) {
-						ITranslationUnit project = (ITranslationUnit) sSelection.getFirstElement();
+					Object firstElement = sSelection.getFirstElement();
+					if (firstElement instanceof ITranslationUnit) {
+						ITranslationUnit translationunit = (ITranslationUnit) firstElement;
 						try {
-							IASTNode astNode = project.getAST();
-//							printAST(astNode.getChildren());
+							IASTNode astNode = translationunit.getAST();
+							printAST(astNode.getChildren());
 							viewer.setInput(astNode); // pass a non-null that will be ignored
 							viewer.refresh();
 							
 						} catch (CoreException e) {
 							e.printStackTrace();
 						}
-					} 		
+					} 
+					else {
+						viewer.setInput(null); // pass a non-null that will be ignored
+						viewer.refresh();
+					}
 				}
 			}
 		});
